@@ -208,11 +208,9 @@ string WhiskerTree::str( const unsigned int total ) const
   }
 
   string ret;
-
   for ( const auto &x : _children ) {
     ret += x.str( total );
   }
-
   return ret;
 }
 

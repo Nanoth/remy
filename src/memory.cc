@@ -19,6 +19,11 @@ void Memory::packets_received( const vector< Packet > & packets, const unsigned 
     }
 
     const double rtt = x.tick_received - x.tick_sent;
+
+//    if(flow_id % 100 == 0){
+//        printf("flow_id:%u,seq_num:%d,snd:%.1f,rec:%.1f,rtt:%.1f,min_rtt:%.1f\n",flow_id,x.seq_num,x.tick_sent,x.tick_received,rtt,_min_rtt);
+//    }
+//
     int pkt_outstanding = 1;
     if ( x.seq_num > largest_ack ) {
       pkt_outstanding = x.seq_num - largest_ack;

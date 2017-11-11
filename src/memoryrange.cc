@@ -31,7 +31,6 @@ std::vector< MemoryRange > MemoryRange::bisect( void ) const
 	doubled.emplace_back( ersatz_lower, x._upper, x._active_axis );
       }
     }
-
     ret = doubled;
   }
 

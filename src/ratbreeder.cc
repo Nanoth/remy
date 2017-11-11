@@ -14,7 +14,7 @@ Evaluator< WhiskerTree >::Outcome RatBreeder::improve( WhiskerTree & whiskers )
   whiskers.reset_generation();
   unsigned int generation = 0;
 
-  while ( generation < 5 ) {
+  while ( generation < 4 ) {
     const Evaluator< WhiskerTree > eval( _options.config_range );
 
     auto outcome( eval.score( whiskers ) );
@@ -62,7 +62,7 @@ Evaluator< WhiskerTree >::Outcome RatBreeder::improve( WhiskerTree & whiskers )
   const auto new_score = eval2.score( whiskers, false, 10 );
   const auto old_score = eval2.score( input_whiskertree, false, 10 );
 
-  if ( old_score.score >= new_score.score ) {
+  if ( old_score.score > new_score.score ) {
     fprintf( stderr, "Regression, old=%f, new=%f\n", old_score.score, new_score.score );
     whiskers = input_whiskertree;
     return old_score;

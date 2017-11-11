@@ -24,6 +24,12 @@ public:
 
   unsigned int window( const unsigned int previous_window ) const { return std::min( std::max( 0, int( previous_window * _window_multiple + _window_increment ) ), 1000000 ); }
   const double & intersend( void ) const { return _intersend; }
+  const double & window_multiple(void ) const {
+      return _window_multiple;
+  }
+  const int & window_increment(void )const {
+      return _window_increment;
+  }
   
   std::vector< Whisker > next_generation( bool optimize_window_increment, bool optimize_window_multiple, bool optimize_intersend ) const;
 
@@ -58,9 +64,9 @@ public:
 
   static const OptimizationSettings & get_optimizer( void ) {
     static OptimizationSettings default_settings {
-      { 0,    256, 1,    32,  4, 1 }, /* window increment */
-      { 0,    1,   0.01, 0.5, 4, 1 }, /* window multiple */
-      { 0.25, 3,   0.05, 1,   4, 3 } /* intersend */
+      { 0,    256, 1,    32,  2, 40 }, /* window increment */
+      { 0.5,    1,   0.01, 0.5, 2, 1 }, /* window multiple */
+      { 0.01, 2,   0.01, 0.5,   2, 1 } /* intersend */
     };
     return default_settings;
   }

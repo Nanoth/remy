@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <cmath>
 
 #include "packet.hh"
 #include "dna.pb.h"
@@ -51,6 +52,7 @@ public:
   void reset( void ) { _rec_send_ewma = _rec_rec_ewma = _rtt_ratio = _slow_rec_rec_ewma = _rtt_diff = _queueing_delay = _last_tick_sent = _last_tick_received = _min_rtt = 0; }
 
   static const unsigned int datasize = 6;
+  static constexpr double eps = 1e-8;
 
   const DataType & field( unsigned int num ) const { return num == 0 ? _rec_send_ewma : num == 1 ? _rec_rec_ewma : num == 2 ? _rtt_ratio : num == 3 ? _slow_rec_rec_ewma : num == 4 ? _rtt_diff : _queueing_delay ; }
   DataType & mutable_field( unsigned int num )     { return num == 0 ? _rec_send_ewma : num == 1 ? _rec_rec_ewma : num == 2 ? _rtt_ratio : num == 3 ? _slow_rec_rec_ewma : num == 4 ? _rtt_diff : _queueing_delay ; }
@@ -71,7 +73,7 @@ public:
     return true;
   }
   bool operator==( const Memory & other ) const { 
-    for (unsigned int i = 0; i < datasize; i ++) { if ( field(i) != other.field(i) ) return false; }
+    for (unsigned int i = 0; i < datasize; i ++) { if (fabs( field(i) - other.field(i))>eps ) return false; }
     return true;
   }
 

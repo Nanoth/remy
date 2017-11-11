@@ -22,6 +22,16 @@ public:
 
   WhiskerTree( const Whisker & whisker, const bool bisect );
 
+  const MemoryRange& get_domain(void ) const{
+      return _domain;
+  }
+  const std::vector<Whisker>& leaf(void) const{
+      return _leaf;
+  }
+  const std::vector<WhiskerTree>& children(void) const{
+      return _children;
+  }
+
   const Whisker & use_whisker( const Memory & _memory, const bool track ) const;
 
   void use_window( const unsigned int win ) const;

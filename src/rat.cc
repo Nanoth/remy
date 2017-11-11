@@ -25,7 +25,12 @@ void Rat::packets_received( const vector< Packet > & packets ) {
   _memory.packets_received( packets, _flow_id, _largest_ack );
   _largest_ack = max( packets.at( packets.size() - 1 ).seq_num, _largest_ack );
 
-  const Whisker & current_whisker( _whiskers.use_whisker( _memory, _track ) );
+  bool tmp_track = _track;
+  Memory tmp_memory;
+  if(_memory == tmp_memory){
+      tmp_track = false;
+  }
+  const Whisker & current_whisker( _whiskers.use_whisker( _memory, tmp_track ) );
 
   _the_window = current_whisker.window( _the_window );
   _intersend_time = current_whisker.intersend();
@@ -42,7 +47,9 @@ void Rat::reset( const double & )
   assert( _flow_id != 0 );
 
   /* initial window and intersend time */
-  const Whisker & current_whisker( _whiskers.use_whisker( _memory, _track ) );
+  //tmp add tmp_track
+  bool tmp_track = false;
+  const Whisker & current_whisker( _whiskers.use_whisker( _memory, tmp_track ) );
   _the_window = current_whisker.window( _the_window );
   _intersend_time = current_whisker.intersend();
 }
