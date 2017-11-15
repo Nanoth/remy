@@ -169,8 +169,9 @@ void SwitchedSender<SenderType>::receive_feedback( Receiver & rec )
   if ( rec.readable( id ) ) {
     const std::vector< Packet > & packets = rec.packets_for( id );
 
-    utility.packets_received( packets );
     sender.packets_received( packets );
+    int sz = sender.packets_ack(packets.at(0).seq_num);
+    utility.packets_received( packets ,sz );
 
     rec.clear( id );
   }

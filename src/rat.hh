@@ -48,6 +48,10 @@ public:
 
   SimulationResultBuffers::SenderState state_DNA() const;
 
+  int packets_ack(const int seq){
+      return max(_largest_ack-seq+1,0);
+  }
+
 };
 
 #endif

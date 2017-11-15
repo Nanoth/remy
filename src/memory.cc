@@ -27,6 +27,7 @@ void Memory::packets_received( const vector< Packet > & packets, const unsigned 
     int pkt_outstanding = 1;
     if ( x.seq_num > largest_ack ) {
       pkt_outstanding = x.seq_num - largest_ack;
+      break;
     }
     if ( _last_tick_sent == 0 || _last_tick_received == 0 ) {
       _last_tick_sent = x.tick_sent;

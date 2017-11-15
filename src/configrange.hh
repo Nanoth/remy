@@ -45,6 +45,8 @@ public:
   unsigned int simulation_ticks;
   Range stochastic_loss_rate;
 
+//  Range token_rate;
+
   ConfigRange( void );
   ConfigRange( RemyBuffers::ConfigRange configrange );
   RemyBuffers::ConfigRange DNA( void ) const;

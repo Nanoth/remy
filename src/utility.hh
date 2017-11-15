@@ -27,6 +27,16 @@ public:
     }
   }
 
+  void packets_received(const std::vector<Packet> & packets , const int sz){
+    _packets_received += sz;
+    int cnt=0;
+    for ( auto &x : packets ) {
+      if(cnt++>=sz) break;
+      assert( x.tick_received >= x.tick_sent );
+      _total_delay += x.tick_received - x.tick_sent;
+    }
+  }
+
   /* returns throughput normalized to equal share of link */
   double average_throughput_normalized_to_equal_share( void ) const
   {

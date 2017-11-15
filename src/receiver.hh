@@ -4,15 +4,19 @@
 #include <vector>
 
 #include "packet.hh"
+#include "token-bucket.hh"
 
 class Receiver
 {
 private:
   std::vector< std::vector< Packet > > _collector;
   void autosize( const unsigned int index );
+  Token_Bucket _bucket;
+  bool _bucket_flag;
 
 public:
   Receiver();
+  Receiver(const double token_rate);
 
   void accept( const Packet & p, const double & tickno ) noexcept;
   const std::vector< Packet > & packets_for( const unsigned int src ) { return _collector[ src ]; }
