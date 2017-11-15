@@ -101,6 +101,7 @@ message ConfigRange {
   optional Range mean_on_duration = 76;
   optional uint32 simulation_ticks = 77;
   optional Range stochastic_loss_rate = 78;
+  optional Range token_rate = 79;
 }
 
 message NetConfig {
