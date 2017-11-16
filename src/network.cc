@@ -13,7 +13,7 @@ Network<Gang1Type, Gang2Type>::Network( const typename Gang1Type::Sender & examp
 	      Gang2Type( config.mean_on_duration, config.mean_off_duration, config.num_senders, example_sender2, _prng, config.num_senders ) ),
     _link( config.link_ppt, config.buffer_size ),
     _delay( config.delay ),
-    _rec(),
+    _rec(config.token_rate),
     _tickno( 0 ),
     _stochastic_loss( config.stochastic_loss_rate , _prng)
 {
@@ -28,7 +28,7 @@ Network<Gang1Type, Gang2Type>::Network( const typename Gang1Type::Sender & examp
 	      Gang2Type() ),
     _link( config.link_ppt, config.buffer_size ),
     _delay( config.delay ),
-    _rec(),
+    _rec(config.token_rate),
     _tickno( 0 ),
     _stochastic_loss( config.stochastic_loss_rate , _prng)
 {

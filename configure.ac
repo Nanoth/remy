@@ -20,7 +20,7 @@ AS_IF([test x"$PROTOC" = x],
 PKG_CHECK_MODULES([protobuf], [protobuf])
 
 # Add compiler flags
-CXX11_FLAGS="-std=c++11 -pthread"
+CXX11_FLAGS="-std=c++11 -pthread -static -lrt -ldl"
 AC_SUBST([CXX11_FLAGS])
 
 PICKY_CXXFLAGS="-Wall -Wpedantic -Wextra -Weffc++ -Werror"

@@ -20,7 +20,10 @@ Evaluator< T >::Evaluator( const ConfigRange & range )
           for (double off = range.mean_off_duration.low; off <= range.mean_off_duration.high; off += range.mean_off_duration.incr) {
             for ( double buffer_size = range.buffer_size.low; buffer_size <= range.buffer_size.high; buffer_size += range.buffer_size.incr) {
               for ( double loss_rate = range.stochastic_loss_rate.low; loss_rate <= range.stochastic_loss_rate.high; loss_rate += range.stochastic_loss_rate.incr) {
-                _configs.push_back( NetConfig().set_link_ppt( link_ppt ).set_delay( rtt ).set_num_senders( senders ).set_on_duration( on ).set_off_duration(off).set_buffer_size( buffer_size ).set_stochastic_loss_rate( loss_rate ) );
+                for ( double token_rate = range.token_rate.low;token_rate <= range.token_rate.high; token_rate += range.token_rate.incr){
+                  _configs.push_back( NetConfig().set_link_ppt( link_ppt ).set_delay( rtt ).set_num_senders( senders ).set_on_duration( on ).set_off_duration(off).set_buffer_size( buffer_size ).set_stochastic_loss_rate( loss_rate ).set_token_rate(token_rate));
+                  if( range.token_rate.isOne()){break;}
+                }
                 if ( range.stochastic_loss_rate.isOne() ) { break; }
               }
               if ( range.buffer_size.isOne() ) { break; }

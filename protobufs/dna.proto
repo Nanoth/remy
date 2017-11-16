@@ -112,6 +112,7 @@ message NetConfig {
   optional double delay = 5;
   optional uint32 buffer_size = 6;
   optional double stochastic_loss_rate = 7;
+  optional double token_rate = 8;
 }
 
 message ConfigVector {
