@@ -28,6 +28,9 @@ private:
   unsigned int _flow_id;
   int _largest_ack;
 
+  double _last_retran_tick;
+  bool _retran_stat;
+
 public:
   Rat( WhiskerTree & s_whiskers, const bool s_track=false );
 

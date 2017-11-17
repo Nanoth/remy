@@ -1,5 +1,6 @@
 #include <cassert>
 #include <limits>
+#include <cstdio>
 
 #include "receiver.hh"
 
@@ -15,6 +16,7 @@ Receiver::Receiver(const double token_rate):_collector(),_bucket(token_rate),_bu
 void Receiver::accept( const Packet & p, const double & tickno ) noexcept
 {
   autosize( p.src );
+
     
   if(_bucket_flag && _bucket.used_token(p.src,tickno)){
      _collector[ p.src ].push_back( p );

@@ -14,7 +14,7 @@ private:
     double _max_token;
 
 public:
-    Token_Bucket(const double token_rate = 10,double max_token = 600):_token_rate(token_rate),_token(),_last_tickno(),_max_token(max_token){};
+    Token_Bucket(const double token_rate = 10,double max_token = 100):_token_rate(token_rate),_token(),_last_tickno(),_max_token(max_token){};
 
     void autosize(const unsigned int id){
         if(_token.size() <= id){
@@ -28,18 +28,19 @@ public:
     void set_max_token(const unsigned int max_token){
         _max_token = max_token;
     }
-    void get_token(const unsigned int src ,const double &tickno){
+    double get_token(const unsigned int src ,const double &tickno){
         autosize(src);
 
         double delta = tickno - _last_tickno[src];
         _token[src] += delta*_token_rate;
         _token[src] = _token[src]>_max_token?_max_token:_token[src];
         _last_tickno[src] = tickno;
+        return _token[src];
     }
     bool used_token(const unsigned int src,const double &tickno){
-        get_token(src,tickno);
-        if(_token[src]<1) return false;
-        _token[src] --;
+        double tk = get_token(src,tickno);
+        if(tk < 1) return false;
+        _token[src] -= 1;
         return true;
     }
     void reset(double token_rate = -1)

@@ -27,7 +27,8 @@ void Rat::send( const unsigned int id, NextHop & next, const double & tickno,
     }
 
     Packet p( id, _flow_id, tickno, _packets_sent );
-    _packets_sent++;
+    if(!_retran_stat)
+        _packets_sent++;
     _memory.packet_sent( p );
     next.accept( p, tickno );
     _last_send_time = tickno;
