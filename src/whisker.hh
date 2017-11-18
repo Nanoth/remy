@@ -64,9 +64,9 @@ public:
 
   static const OptimizationSettings & get_optimizer( void ) {
     static OptimizationSettings default_settings {
-      { 0,    256, 1,    32,  2, 40 }, /* window increment */
-      { 0.5,    1,   0.01, 0.5, 2, 1 }, /* window multiple */
-      { 0.01, 2,   0.01, 0.5,   2, 1 } /* intersend */
+      { 0,    256, 1,    32,  4, 10 }, /* window increment */
+      { 0.5,    1,   0.05, 0.5, 4, 1 }, /* window multiple */
+      { 0.01, 2,   0.01, 0.5,   4, 1 } /* intersend */
     };
     return default_settings;
   }
