@@ -55,6 +55,10 @@ public:
       return max(_largest_ack-seq+1,0);
   }
 
+  bool get_retran_stat(){
+      return _retran_stat;
+  }
+
 };
 
 #endif

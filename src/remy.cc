@@ -111,7 +111,6 @@ struct WHK{
 };
 
 
-
 int main( int argc, char *argv[] )
 {
   WhiskerTree whiskers;
@@ -302,6 +301,7 @@ int main( int argc, char *argv[] )
     printf( "run = %u, score = %f\n", run, outcome.score );
 
     printf( "whiskers: %s\n", whiskers.str().c_str() );
+    printf( " usage: %s \n", whiskers.print_usage().c_str());
 
     for ( auto &run : outcome.throughputs_delays ) {
       if ( !(written) ) {

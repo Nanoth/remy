@@ -52,6 +52,8 @@ public:
 
   bool is_leaf( void ) const;
 
+  std::string print_usage( void ) const ;
+
   RemyBuffers::WhiskerTree DNA( void ) const;
   WhiskerTree( const RemyBuffers::WhiskerTree & dna );
 };

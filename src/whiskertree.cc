@@ -2,10 +2,12 @@
 #include <cmath>
 #include <algorithm>
 #include <numeric>
+#include <queue>
 
 #include "whiskertree.hh"
 
 using namespace std;
+
 
 WhiskerTree::WhiskerTree()
   : _domain( Memory(), MAX_MEMORY() ),
@@ -227,6 +229,24 @@ unsigned int WhiskerTree::num_children( void ) const
 bool WhiskerTree::is_leaf( void ) const
 {
   return !_leaf.empty();
+}
+
+string WhiskerTree::print_usage( void ) const
+{
+    double total_queries = total_whisker_queries();
+    string ret;
+    queue<WhiskerTree> que;
+    while(!que.empty()) que.pop();
+    que.push(*this);
+    int cnt=0;
+    while(!que.empty()){
+        WhiskerTree wt = que.front();
+        que.pop();
+        ret += to_string(cnt++)+" : " + to_string(wt.leaf().front().count()/total_queries) + " , ";
+        if(wt.is_leaf()) continue;
+        for(auto &x : wt.children()) que.push(x);
+    }
+    return ret;
 }
 
 RemyBuffers::WhiskerTree WhiskerTree::DNA( void ) const

@@ -19,7 +19,8 @@ Fish::Fish( const FinTree & fins, const unsigned int s_prng_seed, const bool s_t
      _max_intersend( 0 ),
      _batch_size( 5 ),
      _prng( s_prng_seed ),
-     _distribution( 1 )
+     _distribution( 1 ),
+     _retran_stat(false)
 {
 }
 

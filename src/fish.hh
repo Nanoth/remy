@@ -36,6 +36,8 @@ private:
 
   void _update_lambda( const double lambda );
 
+  bool _retran_stat;
+
 public:
   Fish( const FinTree & fins, const unsigned int s_prng_seed, const bool s_track );
 
@@ -56,6 +58,9 @@ public:
   SimulationResultBuffers::SenderState state_DNA() const;
   int packets_ack(const int seq){
       return max(_largest_ack-seq+1,0);
+  }
+  bool get_retran_stat(){
+      return _retran_stat;
   }
 
 };
