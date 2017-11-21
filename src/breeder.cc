@@ -108,9 +108,52 @@ vector<A> ActionImprover< T, A >::early_bail_out( const vector< A > &replacement
   }
   return top_replacements;
 }
+template <typename T, typename A>
+double ActionImprover< T, A >::improve( A & action_to_improve ,const int batch)
+{
+  auto all_replacements = get_replacements( action_to_improve );
+  int cnt=0;
+  int sz = all_replacements.size();
+  std::vector< A > replacements;
+  for(auto &x: all_replacements){
+      replacements.emplace_back(x);
+      cnt++;
+      if( cnt % batch == 0 || cnt == sz ){
+          vector< pair< const A &, future< pair< bool, double > > > > scores;
+
+          /* Run for 10% simulation time to get estimates for the final score 
+             and discard bad performing ones early on. */
+          vector<A> top_replacements = early_bail_out( replacements, 0.1, 0.5 );
+
+          /* find best replacement */
+          evaluate_replacements( top_replacements, scores, 1 );
+          for ( auto & x : scores ) {
+             const A & replacement( x.first );
+             const auto outcome( x.second.get() );
+             const bool was_new_evaluation( outcome.first );
+             const double score( outcome.second );
+
+             /* should we cache this result? */
+             if ( was_new_evaluation ) {
+               eval_cache_.insert( make_pair( replacement, score ) );
+             }
+
+             if ( score > score_to_beat_ ) {
+              score_to_beat_ = score;
+              action_to_improve = replacement;
+             }
+          }
+         replacements.clear();
+      }
+  }
+
+  cout << "Chose " << action_to_improve.str() << endl;
+
+  return score_to_beat_;
+}
 
 template <typename T, typename A>
-double ActionImprover< T, A >::improve( A & action_to_improve )
+double ActionImprover< T, A >::improve_old( A & action_to_improve )
 {
   auto replacements = get_replacements( action_to_improve );
   vector< pair< const A &, future< pair< bool, double > > > > scores;

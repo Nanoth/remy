@@ -23,7 +23,7 @@ PKG_CHECK_MODULES([protobuf], [protobuf])
 CXX11_FLAGS="-std=c++11 -pthread"
 AC_SUBST([CXX11_FLAGS])
 
-PICKY_CXXFLAGS="-Wall -Wpedantic -Wextra -Weffc++ -Werror"
+PICKY_CXXFLAGS="-Wall -Wpedantic -Wextra -Weffc++ "
 AC_SUBST([PICKY_CXXFLAGS])
 
 AC_ARG_ENABLE([graph],

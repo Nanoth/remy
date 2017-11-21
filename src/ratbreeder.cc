@@ -64,7 +64,7 @@ Evaluator< WhiskerTree >::Outcome RatBreeder::improve( WhiskerTree & whiskers )
 
   if ( old_score.score > new_score.score ) {
     fprintf( stderr, "Regression, old=%f, new=%f\n", old_score.score, new_score.score );
-    whiskers = input_whiskertree;
+//    whiskers = input_whiskertree;
     return old_score;
   }
 

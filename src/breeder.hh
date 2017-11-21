@@ -41,7 +41,9 @@ public:
                    const double score_to_beat );
   virtual ~ActionImprover() {};
 
-  double improve( A & action_to_improve );
+  double improve_old( A & action_to_improve );
+
+  double improve( A & action_to_improve , const int batch = 150);
 };
 
 template <typename T>
