@@ -6,7 +6,7 @@
 using namespace std;
 
 template <class NextHop>
-void Rat::send( const unsigned int id, NextHop & next, const double & tickno,
+bool Rat::send( const unsigned int id, NextHop & next, const double & tickno,
 		const unsigned int packets_sent_cap )
 {
   assert( int( _packets_sent ) >= _largest_ack + 1 );
@@ -23,7 +23,7 @@ void Rat::send( const unsigned int id, NextHop & next, const double & tickno,
 
     /* Have we reached the end of the flow for now? */
     if ( _packets_sent >= packets_sent_cap ) {
-      return;
+      return false;
     }
 
     Packet p( id, _flow_id, tickno, _packets_sent );
@@ -31,5 +31,7 @@ void Rat::send( const unsigned int id, NextHop & next, const double & tickno,
     _memory.packet_sent( p );
     next.accept( p, tickno );
     _last_send_time = tickno;
+    return true;
   }
+  return false;
 }

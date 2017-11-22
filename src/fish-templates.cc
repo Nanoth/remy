@@ -6,9 +6,9 @@
 using namespace std;
 
 template <class NextHop>
-void Fish::send( const unsigned int id, NextHop & next, const double & tickno )
+bool Fish::send( const unsigned int id, NextHop & next, const double & tickno )
 {
-  if ( tickno < _next_send_time ) { return; }
+  if ( tickno < _next_send_time ) { return false; }
   
   assert( _packets_sent >= _largest_ack + 1 );
 
@@ -24,4 +24,5 @@ void Fish::send( const unsigned int id, NextHop & next, const double & tickno )
     next.accept( p, tickno );
   }
   _update_send_time( tickno );
+  return true;
 }

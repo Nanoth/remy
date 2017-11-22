@@ -188,7 +188,8 @@ void TimeSwitchedSender<SenderType>::tick( NextHop & next, Receiver & rec,
 
   /* possibly send packets */
   if ( SwitchedSender<SenderType>::sending ) {
-    SwitchedSender<SenderType>::sender.send( SwitchedSender<SenderType>::id, next, tickno );
+    if(SwitchedSender<SenderType>::sender.send( SwitchedSender<SenderType>::id, next, tickno ) )
+        SwitchedSender<SenderType>::utility.sending_packet();
     SwitchedSender<SenderType>::accumulate_sending_time_until( tickno, num_sending );
   }
 }

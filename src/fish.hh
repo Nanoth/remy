@@ -45,7 +45,7 @@ public:
   const FinTree & fins( void ) const { return _fins; }
 
   template <class NextHop>
-  void send( const unsigned int id, NextHop & next, const double & tickno );
+  bool send( const unsigned int id, NextHop & next, const double & tickno );
 
   Fish & operator=( const Fish & ) { assert( false ); return *this; }
 
