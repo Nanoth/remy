@@ -27,20 +27,20 @@ struct M{
     u64 _send_ewma;
     u64 _rec_ewma;
     u64 _rtt_ratio;
-    u64 _slow_rec_ewma;
+    u64 _loss_rate;
     M():_send_ewma(0),
         _rec_ewma(0),
         _rtt_ratio(0),
-        _slow_rec_ewma(0){};
+        _loss_rate(0){};
     M(struct M& tmp):_send_ewma(tmp._send_ewma),
                     _rec_ewma(tmp._rec_ewma),
                     _rtt_ratio(tmp._rtt_ratio),
-                    _slow_rec_ewma(tmp._slow_rec_ewma){};
+                    _loss_rate(tmp._loss_rate){};
     M& operator=(const Memory &m){
         this->_send_ewma=(u64)(m.field(0)*(1<<remycc_shift));
         this->_rec_ewma=(u64)(m.field(1)*(1<<remycc_shift));
         this->_rtt_ratio=(u64)(m.field(2)*(1<<remycc_shift));
-//        this->_slow_rec_ewma=(u64)(m.field(3)*(1<<remycc_shift));
+        this->_loss_rate=(u64)(m.field(3)*(1<<remycc_shift));
         return *this;
     }
     string str() const{
@@ -48,8 +48,8 @@ struct M{
         ret+=" <send,rec,rtt>=<";
         ret=ret+to_string(_send_ewma)+","\
             +to_string(_rec_ewma)+","\
-            +to_string(_rtt_ratio)+"> ";
-//            +to_string(_slow_rec_ewma)+"> ";
+            +to_string(_rtt_ratio)+"> "\
+            +to_string(_loss_rate)+"> ";
         return ret;
     };
 
