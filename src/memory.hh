@@ -63,7 +63,7 @@ public:
 
   void reset( void ) { _rec_send_ewma = _rec_rec_ewma = _rtt_ratio = _slow_rec_rec_ewma = _rtt_diff = _queueing_delay = _last_tick_sent = _last_tick_received = _min_rtt = _loss_rate = _current_num = 0; _bs_loss_seq.reset();}
 
-  static const unsigned int datasize = 4;
+  static const unsigned int datasize = 7;
   static constexpr double eps = 1e-8;
 
   const DataType & field( unsigned int num ) const { return num == 0 ? _rec_send_ewma : num == 1 ? _rec_rec_ewma : num == 2 ? _rtt_ratio : num == 3 ? _loss_rate : num == 4 ? _slow_rec_rec_ewma : num == 5 ? _rtt_diff : _queueing_delay ; }

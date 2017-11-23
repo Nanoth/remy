@@ -30,13 +30,13 @@ void Memory::packets_received( const vector< Packet > & packets, const unsigned 
       continue;
     }
     if(x.seq_num < cur_ack)
-        bit_flip(x.seq_num - cur_ack, true);
+        bit_flip(x.seq_num - cur_ack, false);
     else
         for(;cur_ack<=x.seq_num;cur_ack++){
             if(cur_ack == x.seq_num)
-                bit_flip(0,true);
-            else
                 bit_flip(0,false);
+            else
+                bit_flip(0,true);
             next_current_num();
         }
             
@@ -111,7 +111,7 @@ string Memory::str( unsigned int num ) const
 
 const Memory & MAX_MEMORY( void )
 {
-  static const Memory max_memory( { 163840, 163840, 163840, 100, 163840, 163840, 163840 } );
+  static const Memory max_memory( { 163840, 163840, 163840, Memory::BitsetLength + 1, 163840, 163840, 163840 } );
   return max_memory;
 }
 
@@ -142,7 +142,9 @@ Memory::Memory( const bool is_lower_limit, const RemyBuffers::Memory & dna )
     _queueing_delay( get_val_or_default( dna, queueing_delay, is_lower_limit ) ),
     _last_tick_sent( 0 ),
     _last_tick_received( 0 ),
-    _min_rtt( 0 )
+    _min_rtt( 0 ),
+    _bs_loss_seq(),
+    _current_num(0)
 {
 }
 

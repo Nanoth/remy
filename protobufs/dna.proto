@@ -36,10 +36,10 @@ message MemoryRange {
     SEND_EWMA = 0;
     REC_EWMA = 1;
     RTT_RATIO = 2;
-    SLOW_REC_EWMA = 3;
-    RTT_DIFF = 4;
-    QUEUEING_DELAY = 5;
-    LOSS_RATE = 6;
+    LOSS_RATE = 3;
+    SLOW_REC_EWMA = 4;
+    RTT_DIFF = 5;
+    QUEUEING_DELAY = 6;
   }
 
   repeated Axis active_axis = 13;
@@ -49,10 +49,10 @@ message Memory {
   optional double rec_send_ewma = 21;
   optional double rec_rec_ewma = 22;
   optional double rtt_ratio = 23;
-  optional double slow_rec_rec_ewma = 24;
-  optional double rtt_diff = 25;
-  optional double queueing_delay = 26;
-  optional double loss_rate = 27;
+  optional double loss_rate = 24;
+  optional double slow_rec_rec_ewma = 25;
+  optional double rtt_diff = 26;
+  optional double queueing_delay = 27;
 }
 
 message Whisker {
