@@ -16,7 +16,7 @@ std::vector< MemoryRange > MemoryRange::bisect( void ) const
       auto ersatz_lower( x._lower ), ersatz_upper( x._upper );
       ersatz_lower.mutable_field( i ) = ersatz_upper.mutable_field( i ) = median( _acc[ i ] );
 
-      if ( x._lower == ersatz_upper ) {
+      if ( x._lower == ersatz_upper || i == RemyBuffers::MemoryRange::LOSS_RATE ) {
 	/* try range midpoint instead */
 	ersatz_lower.mutable_field( i ) = ersatz_upper.mutable_field( i ) = (x._lower.field( i ) + x._upper.field( i )) / 2;
       }
