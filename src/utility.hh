@@ -16,7 +16,7 @@ private:
   double _total_send;
 
 public:
-  Utility( void ) : _tick_share_sending( 0 ), _packets_received( 0 ), _total_delay( 0 ), _delta(1), _total_send(0) {}
+  Utility( void ) : _tick_share_sending( 0 ), _packets_received( 0 ), _total_delay( 0 ), _delta(0.1), _total_send(0) {}
 
   void sending_duration( const double & duration, const unsigned int num_sending ) { _tick_share_sending += duration / double( num_sending ); }
   void packets_received( const std::vector< Packet > & packets ) {
